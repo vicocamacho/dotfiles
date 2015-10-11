@@ -1,10 +1,10 @@
 "*":
   editor:
     showIndentGuide: true
-    fontFamily: "Menlo"
     invisibles: {}
-    fontSize: 15
     softWrapAtPreferredLineLength: true
+    fontSize: 13
+    fontFamily: "Bitstream Vera Sans Mono"
   core:
     ignoredNames: [
       ".bundle"
@@ -12,17 +12,25 @@
       "log"
       "repositories"
       "tmp"
-      "vendor"
     ]
     themes: [
-      "unity-ui"
-      "glacier-syntax"
+      "nucleus-dark-ui"
+      "atom-dark-fusion-syntax"
     ]
     hideGitIgnoredFiles: true
     disabledPackages: [
       "background-tips"
       "exception-reporting"
       "metrics"
+      "language-clojure"
+      "language-csharp"
+      "language-go"
+      "language-java"
+      "language-make"
+      "language-mustache"
+      "language-objective-c"
+      "language-perl"
+      "language-python"
     ]
   "spell-check":
     grammars: [
