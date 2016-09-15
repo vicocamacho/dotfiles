@@ -1,23 +1,7 @@
 "*":
-  editor:
-    showIndentGuide: true
-    invisibles: {}
-    softWrapAtPreferredLineLength: true
-    fontSize: 13
-    fontFamily: "Bitstream Vera Sans Mono"
   core:
-    ignoredNames: [
-      ".bundle"
-      ".git"
-      "log"
-      "repositories"
-      "tmp"
-    ]
-    themes: [
-      "nucleus-dark-ui"
-      "atom-dark-fusion-syntax"
-    ]
-    hideGitIgnoredFiles: true
+    audioBeep: false
+    closeEmptyWindows: false
     disabledPackages: [
       "background-tips"
       "exception-reporting"
@@ -32,6 +16,26 @@
       "language-perl"
       "language-python"
     ]
+    hideGitIgnoredFiles: true
+    ignoredNames: [
+      ".bundle"
+      ".git"
+      "log"
+      "repositories"
+      "tmp"
+    ]
+    themes: [
+      "nucleus-dark-ui"
+      "dracula-theme"
+    ]
+  editor:
+    fontFamily: "Bitstream Vera Sans Mono"
+    fontSize: 13
+    invisibles: {}
+    showIndentGuide: true
+    softWrapAtPreferredLineLength: true
+  "release-notes":
+    viewedVersion: "0.89.0"
   "spell-check":
     grammars: [
       "text.plain"
@@ -40,5 +44,3 @@
     ]
   welcome:
     showOnStartup: false
-  "release-notes":
-    viewedVersion: "0.89.0"
