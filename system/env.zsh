@@ -1,3 +1,5 @@
 export EDITOR='atom'
 export SOCKET_DIR='/usr/local/var/www'
+export HOMEBREW_SOCKET_DIR='/usr/local/var/www'
 export LOG_DIR='/usr/local/var/log/nginx'
+export HOMEBREW_LOG_DIR='/usr/local/var/log/nginx'

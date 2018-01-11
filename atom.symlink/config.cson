@@ -24,13 +24,14 @@
       "repositories"
       "tmp"
     ]
+    telemetryConsent: "no"
     themes: [
       "nucleus-dark-ui"
-      "dracula-theme"
+      "one-dark-syntax"
     ]
   editor:
+    autoIndentOnPaste: false
     fontFamily: "Bitstream Vera Sans Mono"
-    fontSize: 13
     invisibles: {}
     showIndentGuide: true
     softWrapAtPreferredLineLength: true
@@ -42,5 +43,7 @@
       "source.gfm"
       "text.git-commit"
     ]
+  "tree-view":
+    hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
