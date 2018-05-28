@@ -1,43 +1,41 @@
-cask_args appdir: '/Applications'
-
-tap 'homebrew/bundle'
-tap 'puma/puma'
-
-brew 'ack'
-brew 'coreutils'
-brew 'go'
-brew 'grc'
-brew 'imagemagick'
-brew 'jp2a'
-brew 'jq'
-brew 'libcaca', args: ['with-imlib2']
-brew 'libgit2'
-brew 'openssl'
-brew 'node'
-brew 'readline'
-brew 'postgresql'
-brew 'puma/puma/puma-dev'
-brew 'ruby-build'
-brew 'rbenv'
-brew 'roundup'
-brew 'spaceman-diff'
-brew 'spark'
-brew 'unrar'
-brew 'wget'
-brew 'yarn'
-brew 'youtube-dl'
-
-cask '1password'
-cask 'adium'
-cask 'atom'
-cask 'firefox'
-cask 'garmin-express'
-cask 'google-chrome'
-cask 'handbrake'
-cask 'mapbox-studio'
-cask 'seashore'
-cask 'slack'
-cask 'steam'
-cask 'transmission'
-cask 'tunnelbear'
-cask 'vlc'
+tap "puma/puma"
+tap "homebrew/core"
+tap "homebrew/versions"
+tap "homebrew/cask"
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "github/bootstrap"
+brew "ack"
+brew "autoconf"
+brew "coreutils"
+brew "gdbm"
+brew "gnupg"
+brew "go"
+brew "python"
+brew "grc"
+brew "imagemagick"
+brew "jp2a"
+brew "jq"
+brew "launch_socket_server", restart_service: true
+brew "launchdns", restart_service: true
+brew "libcaca", args: ["with-imlib2"]
+brew "libgit2"
+brew "mysql", restart_service: true
+brew "nginx", restart_service: true
+brew "node"
+brew "node-build"
+brew "nodenv"
+brew "phantomjs"
+brew "pinentry-mac"
+brew "postgresql", restart_service: true
+brew "ruby-build"
+brew "rbenv"
+brew "redis", restart_service: true
+brew "roundup"
+brew "spaceman-diff"
+brew "spark"
+brew "unrar"
+brew "wget"
+brew "wine"
+brew "yarn"
+brew "puma/puma/puma-dev"
