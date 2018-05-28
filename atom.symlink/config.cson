@@ -26,8 +26,8 @@
     ]
     telemetryConsent: "no"
     themes: [
-      "nucleus-dark-ui"
-      "one-dark-syntax"
+      "city-lights-ui"
+      "city-lights-syntax"
     ]
   editor:
     autoIndentOnPaste: false
