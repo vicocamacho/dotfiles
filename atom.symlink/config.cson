@@ -42,6 +42,7 @@
       "text.plain"
       "source.gfm"
       "text.git-commit"
+      "text.html.basic"
     ]
   "tree-view":
     hideVcsIgnoredFiles: true
