@@ -33,16 +33,17 @@ git_prompt_info () {
  echo "${ref#refs/heads/}"
 }
 
-unpushed () {
-  $git cherry -v @{upstream} 2>/dev/null
-}
-
 need_push () {
-  if [[ $(unpushed) == "" ]]
+  if [ $($git rev-parse --is-inside-work-tree 2>/dev/null) ]
   then
-    echo " "
-  else
-    echo " with %{$fg_bold[magenta]%}unpushed%{$reset_color%} "
+    number=$($git cherry -v origin/$(git symbolic-ref --short HEAD) 2>/dev/null | wc -l | bc)
+
+    if [[ $number == 0 ]]
+    then
+      echo " "
+    else
+      echo " with %{$fg_bold[magenta]%}$number unpushed%{$reset_color%}"
+    fi
   fi
 }
 
@@ -72,7 +73,10 @@ directory_name() {
 }
 
 battery_status() {
-  $ZSH/bin/battery-status
+  if [[ $(sysctl -n hw.model) == *"Book"* ]]
+  then
+    $ZSH/bin/battery-status
+  fi
 }
 
 export PROMPT=$'\n$(battery_status) $(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n› '
