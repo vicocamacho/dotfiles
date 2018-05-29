@@ -13,6 +13,7 @@ brew "gnupg"
 brew "go"
 brew "python"
 brew "grc"
+brew "hub"
 brew "imagemagick"
 brew "jp2a"
 brew "jq"
@@ -21,6 +22,7 @@ brew "launchdns", restart_service: true
 brew "libcaca", args: ["with-imlib2"]
 brew "libgit2"
 brew "mysql", restart_service: true
+brew "netcdf"
 brew "nginx", restart_service: true
 brew "node"
 brew "node-build"
