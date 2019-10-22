@@ -1,4 +1,4 @@
-export EDITOR='atom'
+export EDITOR='mate'
 export SOCKET_DIR='/usr/local/var/www'
 export HOMEBREW_SOCKET_DIR='/usr/local/var/www'
 export LOG_DIR='/usr/local/var/log/nginx'
