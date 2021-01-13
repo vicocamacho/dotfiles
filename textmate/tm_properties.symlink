@@ -1,2 +1,2 @@
-excludeInFileChooser = "{$excludeInFileChooser,log,vendor,tmp,.git,node_modules}"
-excludeInFolderSearch = "{$excludeInFolderSearch,log,vendor,tmp,.git,node_modules}"
+excludeInFileChooser = "{$excludeInFileChooser,log,vendor,tmp,.git,node_modules,storage}"
+excludeInFolderSearch = "{$excludeInFolderSearch,log,vendor,tmp,.git,node_modules,storage}"
