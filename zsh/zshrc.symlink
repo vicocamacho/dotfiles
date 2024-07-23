@@ -43,7 +43,6 @@ done
 unset config_files
 
 # rbenv
-export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
 
 # nodenv
