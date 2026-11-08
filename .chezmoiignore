@@ -1,0 +1,5 @@
+README.md
+.config/nvim/.ruby-lsp
+.config/nvim/.ruby-lsp/**
+**/.DS_Store
+LICENSE.md
