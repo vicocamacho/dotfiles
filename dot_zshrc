@@ -1,0 +1,70 @@
+# Personal shell customizations stay local to this machine.
+[[ -f "$HOME/.localrc" ]] && source "$HOME/.localrc"
+export EDITOR="${EDITOR:-nvim}"
+export PROJECTS="${PROJECTS:-$HOME/src}"
+typeset -U path
+path=("$HOME/.local/bin" $path)
+
+# Completion and searchable history.
+autoload -Uz compinit
+compinit
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+setopt APPEND_HISTORY SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+for direction in up down; do
+  autoload -Uz "$direction-line-or-beginning-search"
+  zle -N "$direction-line-or-beginning-search"
+done
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+
+# Git shortcuts from the previous dotfiles.
+alias gl='git pull --prune'
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gp='git push origin HEAD'
+alias gd='git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\1/" | less -R'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gco='git checkout'
+alias gb='git branch'
+alias gs='git status -sb'
+alias gac='git add -A && git commit -m'
+gf() { git checkout -b "$1" "origin/$1"; }
+
+# Copy branch name using the clipboard available on this OS.
+gcb() {
+  local branch
+  branch=$(git rev-parse --abbrev-ref HEAD) || return
+  print -r -- "$branch"
+  if (( $+commands[pbcopy] )); then
+    printf '%s' "$branch" | pbcopy
+  elif (( $+commands[wl-copy] )); then
+    printf '%s' "$branch" | wl-copy
+  elif (( $+commands[xclip] )); then
+    printf '%s' "$branch" | xclip -selection clipboard
+  else
+    print -u2 'No clipboard tool found; branch name printed above.'
+    return 1
+  fi
+}
+
+# Preserve filenames containing spaces when opening untracked files.
+ge() {
+  local file
+  local -a files
+  git rev-parse --git-dir >/dev/null 2>&1 || return
+  while IFS= read -r -d $'\0' file; do
+    files+=("$file")
+  done < <(git ls-files --others --exclude-standard -z)
+  (( ${#files} )) && "${(@z)EDITOR}" "${files[@]}"
+}
+
+c() { builtin cd -- "$PROJECTS${1:+/$1}"; }
+_c() { _files -W "$PROJECTS" -/; }
+compdef _c c
+e() { "${(@z)EDITOR}" "${@:-.}"; }
+
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi

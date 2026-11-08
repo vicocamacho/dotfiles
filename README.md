@@ -1,87 +1,63 @@
-# holman does dotfiles
+# Personal dotfiles
 
-Your dotfiles are how you personalize your system. These are mine.
+A small chezmoi setup for macOS and Linux, replacing the previous custom zsh
+loader. Includes zsh shortcuts, Neovim, Herdr TUI, Starship and Ghostty.
 
-I was a little tired of having long alias files and everything strewn about
-(which is extremely common on other dotfiles projects, too). That led to this
-project being much more topic-centric. I realized I could split a lot of things
-up into the main areas I used (Ruby, git, system libraries, and so on), so I
-structured the project accordingly.
+## Another machine
 
-If you're interested in the philosophy behind why projects like these are
-awesome, you might want to [read my post on the
-subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
-
-## topical
-
-Everything's built around topic areas. If you're adding a new area to your
-forked dotfiles — say, "Java" — you can simply add a `java` directory and put
-files in there. Anything with an extension of `.zsh` will get automatically
-included into your shell. Anything with an extension of `.symlink` will get
-symlinked without extension into `$HOME` when you run `script/bootstrap`.
-
-## what's inside
-
-A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser
-above and see what components may mesh up with you.
-[Fork it](https://github.com/holman/dotfiles/fork), remove what you don't
-use, and build on what you do use.
-
-## components
-
-There's a few special files in the hierarchy.
-
-- **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
-  available everywhere.
-- **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your
-  environment.
-- **topic/path.zsh**: Any file named `path.zsh` is loaded first and is
-  expected to setup `$PATH` or similar.
-- **topic/completion.zsh**: Any file named `completion.zsh` is loaded
-  last and is expected to setup autocomplete.
-- **topic/install.sh**: Any file named `install.sh` is executed when you run `script/install`. To avoid being loaded automatically, its extension is `.sh`, not `.zsh`.
-- **topic/\*.symlink**: Any file ending in `*.symlink` gets symlinked into
-  your `$HOME`. This is so you can keep all of those versioned in your dotfiles
-  but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `script/bootstrap`.
-
-## install
-
-Run this:
+Install chezmoi, zsh, Git, Neovim (0.11+), Starship, Herdr and Ghostty (1.2.3+).
+Install BitstromWera Nerd Font for the configured font and prompt icons.
+For Neovim, install ripgrep and a C compiler/make; language servers and project
+runtimes must be installed separately. LazyGit needs the lazygit executable.
 
 ```sh
-git clone https://github.com/holman/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-script/bootstrap
+chezmoi init https://github.com/vicocamacho/dotfiles.git
+chezmoi diff
+chezmoi apply
 ```
 
-This will symlink the appropriate files in `.dotfiles` to your home directory.
-Everything is configured and tweaked within `~/.dotfiles`.
+Use zsh as your interactive shell. No OS defaults, apps or services are installed
+automatically. This setup does not configure Bash.
 
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
-which sets up a few paths that'll be different on your particular machine.
+## Shortcuts
 
-`dot` is a simple script that installs some dependencies, sets sane macOS
-defaults, and so on. Tweak this script, and occasionally run `dot` from
-time to time to keep your environment fresh and up-to-date. You can find
-this script in `bin/`.
+- Git: gl, glog, gp, gd, gc, gca, gco, gb, gs, gac, gf, gcb, ge.
+- c [project/subdirectory]: jump below $PROJECTS, default ~/src; supports Tab completion.
+- e [files...]: open in $EDITOR, default nvim; no arguments opens the current directory.
+- gcb copies the branch with pbcopy (macOS), wl-copy (Wayland), or xclip (X11).
+- ge opens untracked files, including filenames with spaces.
 
-## bugs
+Set machine-specific environment variables in ~/.localrc (not tracked), e.g.:
 
-I want this to work for everyone; that means when you clone it down it should
-work for you even though you may not have `rbenv` installed, for example. That
-said, I do use this as _my_ dotfiles, so there's a good chance I may break
-something if I forget to make a check for a dependency.
+```sh
+export PROJECTS="$HOME/code"
+```
 
-If you're brand-new to the project and run into any blockers, please
-[open an issue](https://github.com/holman/dotfiles/issues) on this repository
-and I'd love to get it fixed for you!
+## Daily use
 
-## thanks
+```sh
+chezmoi edit --apply ~/.zshrc
+chezmoi diff
+chezmoi apply
+chezmoi cd
+# review, git add, git commit, git push
+```
 
-I forked [Ryan Bates](http://github.com/ryanb)' excellent
-[dotfiles](http://github.com/ryanb/dotfiles) for a couple years before the
-weight of my changes and tweaks inspired me to finally roll my own. But Ryan's
-dotfiles were an easy way to get into bash customization, and then to jump ship
-to zsh a bit later. A decent amount of the code in these dotfiles stem or are
-inspired from Ryan's original project.
+After direct edits to a plain managed file: `chezmoi add PATH`.
+Ghostty and .zprofile use templates: use `chezmoi edit --apply PATH` to preserve
+OS-specific logic. On another machine: `chezmoi update` pulls and applies.
+
+## Scope
+
+Preserves the current editor, terminal and prompt customization. Tests run in
+Neovim's terminal; tmux/Vimux and old project-specific sessionizer mappings were
+removed. Herdr bindings for missing worktree/sessionizer scripts were removed;
+other Herdr bindings remain, including plugin actions requiring their plugins.
+Neovim plugin revisions remain locked, except the removed Vimux plugin.
+
+Excludes generated files, sessions, caches, credentials and machine-local settings.
+The old bootstrap scripts, prompt, legacy Vim config, macOS defaults, package list,
+Ruby/Node version-manager initialization and unused helper scripts are not carried
+over. Add runtime initialization later if needed.
+
+Adapted from https://github.com/vicocamacho/dotfiles; original license retained.
